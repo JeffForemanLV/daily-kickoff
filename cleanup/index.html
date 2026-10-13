@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html{color-scheme:light}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Pipeline Cleanup Review</title>
+<style>
+  /* Per-closer review board: each closer opens their stale deals, marks Close / Keep / Unsure. Mirrors The Daily Kickoff's palette. */
+  :root {
+    --bg:#f4f2f7; --surface:#ffffff; --surface-2:#faf9fc; --line:#e7e2ef; --line-strong:#d6cfe4;
+    --ink:#1b1726; --ink-2:#564f68; --ink-faint:#897f9b;
+    --accent:#6d28d9; --accent-soft:#f1eafc; --accent-line:#c9b4f0;
+    --good:#0f9d6a; --good-bg:#e4f6ee; --warn:#b4700a; --warn-bg:#fbf0dd; --bad:#d23b3b; --bad-bg:#fbe6e6;
+    --radius:13px;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color-scheme:light;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5; }
+  .wrap { max-width:900px; margin:0 auto; padding-block:24px; padding-left:16px; padding-right:16px; }
+  header.top { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+  header.top h1 { font-size:21px; margin:0; letter-spacing:-.4px; font-weight:700; }
+  .dot { color:var(--accent); }
+  .sub { color:var(--ink-2); font-size:13px; }
+  .intro { background:var(--surface); border:1px solid var(--line-strong); border-radius:var(--radius); padding:15px 17px; margin:14px 0 18px; font-size:14px; color:var(--ink-2); }
+  .intro b { color:var(--ink); }
+  .intro .legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:11px; font-size:12.5px; }
+  .intro .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .sw { width:12px; height:12px; border-radius:3px; display:inline-block; }
+
+  .kstrip { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; margin-bottom:18px; }
+  .kpi { background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:11px 8px; text-align:center; }
+  .kpi .n { font-size:23px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; color:var(--accent); }
+  .kpi .l { font-size:10.5px; color:var(--ink-2); margin-top:6px; }
+  @media (max-width:640px){ .kstrip{grid-template-columns:repeat(2,1fr);} }
+
+  details.closerbox { border:1px solid var(--line-strong); border-radius:12px; margin-bottom:10px; background:var(--surface); overflow:hidden; }
+  summary { list-style:none; cursor:pointer; padding:13px 16px; display:flex; align-items:center; gap:12px; font-size:15px; }
+  summary::-webkit-details-marker { display:none; }
+  summary .chev { color:var(--accent); font-size:12px; transition:transform .15s; flex:none; }
+  details[open] summary .chev { transform:rotate(90deg); }
+  summary .who { font-weight:700; }
+  summary .cnt { margin-left:auto; font-variant-numeric:tabular-nums; color:var(--ink-2); font-size:13px; background:var(--surface-2); border:1px solid var(--line); padding:2px 10px; border-radius:20px; }
+  .deals { padding:2px 12px 14px; }
+  .deal { border-top:1px solid var(--line); padding:11px 2px; display:grid; grid-template-columns:1fr auto; gap:8px 12px; align-items:start; }
+  .deal .meta { min-width:0; }
+  .deal .nm a { color:var(--accent); text-decoration:none; font-weight:600; font-size:14.5px; }
+  .deal .nm a:hover { text-decoration:underline; }
+  .deal .facts { font-size:12px; color:var(--ink-faint); margin-top:3px; font-variant-numeric:tabular-nums; }
+  .deal .facts b { color:var(--ink-2); font-weight:600; }
+  .decide { display:flex; gap:4px; }
+  .decide label { cursor:pointer; }
+  .decide input { position:absolute; opacity:0; width:0; height:0; }
+  .decide .opt { display:inline-block; font-size:11.5px; font-weight:600; padding:5px 9px; border-radius:7px; border:1px solid var(--line-strong); color:var(--ink-2); background:var(--surface-2); user-select:none; }
+  .decide input:checked + .opt.close { background:var(--bad); color:#fff; border-color:var(--bad); }
+  .decide input:checked + .opt.keep { background:var(--good); color:#fff; border-color:var(--good); }
+  .decide input:checked + .opt.unsure { background:var(--warn); color:#fff; border-color:var(--warn); }
+  .decide input:focus-visible + .opt { outline:2px solid var(--accent); outline-offset:2px; }
+
+  .progress { font-size:12px; color:var(--ink-2); margin-top:6px; font-variant-numeric:tabular-nums; }
+  .capband { font-size:11px; font-weight:600; padding:1px 7px; border-radius:20px; background:var(--accent-soft); color:var(--accent); white-space:nowrap; }
+  .capband.none { background:var(--surface-2); color:var(--ink-faint); border:1px solid var(--line); }
+  .foot { color:var(--ink-faint); font-size:11.5px; line-height:1.6; margin-top:16px; }
+  .foot b { color:var(--ink-2); }
+  @media (max-width:520px){ .deal{grid-template-columns:1fr;} .decide{margin-top:4px;} }
+</style>
+
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1><span class="dot">&#9679;</span> Pipeline Cleanup Review</h1>
+    <span class="sub">Oct 13, 2026 &middot; 30 stale deals, no future touch</span>
+  </header>
+
+  <div class="intro">
+    <b>Takes 1 minute.</b> These are your open deals that have gone cold &mdash; 30+ days with no meeting or task on the books. Open your name, click each deal to peek at it in HubSpot, and mark it: <b>Close</b> (dead), <b>Keep</b> (you'll rebook it), or <b>Unsure</b> (Jeff looks). Then tell Jeff your Close list. That's it.
+    <div class="legend">
+      <span><span class="sw" style="background:var(--bad)"></span> Close-lost</span>
+      <span><span class="sw" style="background:var(--good)"></span> Keep / rebook</span>
+      <span><span class="sw" style="background:var(--warn)"></span> Unsure</span>
+    </div>
+    <div class="progress" id="prog">0 of 30 reviewed</div>
+  </div>
+
+  <div class="kstrip">
+    <div class="kpi"><div class="n">30</div><div class="l">To review</div></div>
+    <div class="kpi"><div class="n">9</div><div class="l">Russ</div></div>
+    <div class="kpi"><div class="n">9</div><div class="l">Hunter</div></div>
+    <div class="kpi"><div class="n">6</div><div class="l">James</div></div>
+    <div class="kpi"><div class="n">5</div><div class="l">Ben</div></div>
+  </div>
+
+  <div id="board"></div>
+
+  <p class="foot">
+    <b>Source:</b> HubSpot portal 24343234, pipeline Partner Acquisitions &middot; live pull Oct 13. Criteria: open deal, no future meeting, no future task, last activity 30+ days ago.
+    Your marks are saved in this browser only &mdash; send Jeff your Close list when done (the deal links carry the IDs). Aziz has 1; shown at the bottom.
+  </p>
+</div>
+
+<script>
+const DEALS = [
+  {closer:"Russ Vavra", items:[
+    {id:"62630243961", name:"Matt Buckley", stage:"Strategy Scheduled", cap:"", last:"Aug 6"},
+    {id:"61849922140", name:"gary spraggins", stage:"Strategy Scheduled", cap:"", last:"Aug 6"},
+    {id:"62396808789", name:"Dante Carnevale", stage:"Strategy Scheduled", cap:"", last:"Aug 11"},
+    {id:"60016220847", name:"Chris Phillips", stage:"Active Evaluation", cap:"$100-250K", last:"Aug 12"},
+    {id:"61907536796", name:"Luis Uribe", stage:"Strategy Scheduled", cap:"$250-500K", last:"Aug 19"},
+    {id:"63016321362", name:"Kay Johnson", stage:"Strategy Held", cap:"$100-250K", last:"Aug 19"},
+    {id:"63383150399", name:"Cary Skinner", stage:"Strategy Scheduled", cap:"$100-250K", last:"Aug 24"},
+    {id:"64516312477", name:"Jake Kosseff", stage:"Strategy Scheduled", cap:"$100-250K", last:"Sep 1"},
+    {id:"63050127898", name:"Kay Johnson", stage:"Strategy Scheduled", cap:"", last:"Aug 25"}
+  ]},
+  {closer:"Hunter Vavra", items:[
+    {id:"63151705012", name:"Michelle Strayhorn", stage:"Strategy Scheduled", cap:"$50-100K", last:"Jul 31"},
+    {id:"63594594637", name:"Mike Debellis", stage:"Strategy Held", cap:"$50-100K", last:"Aug 10"},
+    {id:"63672737541", name:"Mike Omicioli", stage:"Strategy Held", cap:"$50-100K", last:"Aug 12"},
+    {id:"63766927905", name:"Noah Wiggins", stage:"Strategy Held", cap:"$50-100K", last:"Aug 14"},
+    {id:"63611837753", name:"Patrick Moricette", stage:"Strategy Held", cap:"$50-100K", last:"Aug 14"},
+    {id:"64248259146", name:"Jennifer Pryer", stage:"Strategy Scheduled", cap:"", last:"Aug 25"},
+    {id:"64580232554", name:"Timothy Hamlin", stage:"Strategy Held", cap:"$50-100K", last:"Sep 4"},
+    {id:"64268148588", name:"Myron Gigger", stage:"Strategy Held", cap:"$50-100K", last:"Sep 11"},
+    {id:"64268860734", name:"Jason Brand", stage:"Strategy Scheduled", cap:"$50-100K", last:"Aug 28"}
+  ]},
+  {closer:"James Weisberg", items:[
+    {id:"63550990338", name:"Ranmeet Singh", stage:"Strategy Scheduled", cap:"$50-100K", last:"Aug 24"},
+    {id:"63579101010", name:"Philip Varghese", stage:"Strategy Held", cap:"$250-500K", last:"Aug 20"},
+    {id:"63585788020", name:"Sean Conerly", stage:"Strategy Scheduled", cap:"$50-100K", last:"Sep 9"},
+    {id:"63886040731", name:"frank loglisci", stage:"Strategy Scheduled", cap:"$50-100K", last:"Sep 8"},
+    {id:"63553435507", name:"Jawed Ehsan", stage:"Strategy Held", cap:"$50-100K", last:"Aug 28"},
+    {id:"63538415492", name:"Chinyereugo Sunday", stage:"Strategy Scheduled", cap:"$50-100K", last:"Aug 26"}
+  ]},
+  {closer:"Ben Wildman", items:[
+    {id:"62633347180", name:"Wayne Link", stage:"Strategy Scheduled", cap:"", last:"Jul 22"},
+    {id:"61583656493", name:"Breanna Forni", stage:"Strategy Scheduled", cap:"", last:"Jul 20"},
+    {id:"61014491295", name:"Christina Bartholomew", stage:"Strategy Held", cap:"", last:"Jul 29"},
+    {id:"60989098514", name:"Rahul Malsotra", stage:"Needs Audit", cap:"", last:"Aug 18"},
+    {id:"62887138596", name:"Naven Kang", stage:"Strategy Scheduled", cap:"$500K+", last:"Sep 11"}
+  ]},
+  {closer:"Aziz Kaffel", items:[
+    {id:"54228839095", name:"Terry", stage:"Active Evaluation", cap:"", last:"Jul 14"}
+  ]}
+];
+const HS = "https://app.hubspot.com/contacts/24343234/record/0-3/";
+const board = document.getElementById("board");
+let total = 0;
+DEALS.forEach((grp, gi) => {
+  grp.items.forEach(()=>total++);
+  const d = document.createElement("details");
+  d.className = "closerbox";
+  if (gi === 0) d.open = true;
+  const sum = document.createElement("summary");
+  sum.innerHTML = `<span class="chev">&#9654;</span><span class="who">${grp.closer}</span><span class="cnt">${grp.items.length} to review</span>`;
+  d.appendChild(sum);
+  const wrap = document.createElement("div");
+  wrap.className = "deals";
+  grp.items.forEach(it => {
+    const row = document.createElement("div");
+    row.className = "deal";
+    const capHtml = it.cap ? `<span class="capband">${it.cap}</span>` : `<span class="capband none">no capital</span>`;
+    row.innerHTML = `
+      <div class="meta">
+        <div class="nm"><a href="${HS}${it.id}" target="_blank" rel="noopener">${it.name}</a></div>
+        <div class="facts"><b>${it.stage}</b> &middot; last activity ${it.last} &middot; ${capHtml}</div>
+      </div>
+      <div class="decide" data-id="${it.id}">
+        <label><input type="radio" name="d_${it.id}" value="close"><span class="opt close">Close</span></label>
+        <label><input type="radio" name="d_${it.id}" value="keep"><span class="opt keep">Keep</span></label>
+        <label><input type="radio" name="d_${it.id}" value="unsure"><span class="opt unsure">Unsure</span></label>
+      </div>`;
+    wrap.appendChild(row);
+  });
+  d.appendChild(wrap);
+  board.appendChild(d);
+});
+
+// progress + persistence
+const prog = document.getElementById("prog");
+function load(){ try { return JSON.parse(localStorage.getItem("plc_marks")||"{}"); } catch(e){ return {}; } }
+function save(m){ try { localStorage.setItem("plc_marks", JSON.stringify(m)); } catch(e){} }
+let marks = load();
+Object.keys(marks).forEach(id => {
+  const el = document.querySelector(`input[name="d_${id}"][value="${marks[id]}"]`);
+  if (el) el.checked = true;
+});
+function refresh(){
+  const n = Object.keys(marks).length;
+  const closes = Object.values(marks).filter(v=>v==="close").length;
+  prog.textContent = `${n} of ${total} reviewed  ·  ${closes} marked Close`;
+}
+board.addEventListener("change", e => {
+  if (e.target.name && e.target.name.startsWith("d_")) {
+    marks[e.target.name.slice(2)] = e.target.value;
+    save(marks); refresh();
+  }
+});
+refresh();
+</script>
+
+</body>
+</html>
