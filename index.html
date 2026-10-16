@@ -28,6 +28,8 @@
   .verdict { font-size:17px; line-height:1.45; margin:0 0 13px; font-weight:600; }
   .verdict .tag { display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; padding:3px 9px; border-radius:6px; vertical-align:middle; margin-right:9px; }
   .tag.flat { background:var(--bad-bg); color:var(--bad); }
+  .tag.good { background:var(--good-bg); color:var(--good); }
+  .tag.mid { background:var(--warn-bg); color:var(--warn); }
   .kstrip { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-bottom:13px; }
   .kpi { background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:10px 8px; text-align:center; }
   .kpi .n { font-size:23px; font-weight:700; letter-spacing:-.5px; line-height:1; font-variant-numeric:tabular-nums; }
@@ -53,6 +55,9 @@
   .card h2 .big { color:var(--ink); text-transform:none; letter-spacing:0; font-weight:600; }
   .accentbar { width:3px; align-self:stretch; border-radius:3px; }
   .ab-closer{background:var(--closer);} .ab-sdr{background:var(--sdr);} .ab-lead{background:var(--lead);}
+  .signbar { background:var(--good-bg); border:1px solid var(--good); color:#0b6b48; border-radius:11px; padding:11px 14px; margin-bottom:12px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .signbar .stag { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; background:var(--good); color:#fff; padding:3px 9px; border-radius:6px; }
+  .signbar a { color:#0b6b48; font-weight:700; }
   .tbl-wrap { overflow-x:auto; }
   table { width:100%; border-collapse:collapse; font-size:13.5px; min-width:0; }
   th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
@@ -78,6 +83,7 @@
   .meetings { padding:3px 14px 11px; }
   .mrow { display:grid; grid-template-columns:1fr 92px; gap:10px; align-items:center; padding:7px 0; border-top:1px solid var(--line); font-size:13px; }
   .mrow .mtype { font-size:11px; color:var(--ink-faint); }
+  .mrow .mtype.sign { color:var(--good); font-weight:700; }
   .mrow .cap { text-align:right; font-size:11.5px; font-weight:600; color:var(--ink-2); font-variant-numeric:tabular-nums; white-space:nowrap; }
   .mrow .cap.none { color:var(--ink-faint); font-weight:400; }
   .mrow .cap.g { color:var(--good); }
@@ -92,7 +98,7 @@
   .dashrow .v { text-align:right; font-weight:700; font-size:13px; font-variant-numeric:tabular-nums; }
   .caption { font-size:11.5px; color:var(--ink-faint); margin-top:9px; line-height:1.5; }
   .subhead { font-size:12.5px; color:var(--ink-2); margin:0 0 11px; }
-  .subhead.red{color:var(--bad);} .subhead.amber{color:var(--warn);}
+  .subhead.red{color:var(--bad);} .subhead.amber{color:var(--warn);} .subhead.green{color:var(--good);}
   .reco { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
   .reco .col { background:var(--surface-2); border:1px solid var(--line); border-radius:11px; padding:13px 15px; }
   .reco h3 { font-size:11.5px; text-transform:uppercase; letter-spacing:.6px; margin:0 0 9px; font-weight:600; }
@@ -114,182 +120,200 @@
 
   <header class="top">
     <h1><span class="dot">&#9679;</span> The Daily Kickoff</h1>
-    <span class="sub">Thu Oct 15, 2026 &middot; reviewing Wed Oct 14 &middot; posts 8am EST</span>
+    <span class="sub">Fri Oct 16, 2026 &middot; reviewing Thu Oct 15 &middot; posts 8am EST</span>
   </header>
 
   <div class="command">
-    <p class="verdict"><span class="tag flat">Soft show, strong follow-through</span>Show rate stayed low at 41% again, but closers progressed 5 of 7 held. 17 up today.</p>
+    <p class="verdict"><span class="tag good">Clean hold, signing today</span>Show held at 50%, just over the 30-day trend, and every open deal that held yesterday booked a next step. Harry Barr goes to signing today. 23 on the board.</p>
     <div class="kstrip">
-      <div class="kpi"><div class="n down">41%</div><div class="l">Show rate</div><div class="d down">&#9660; vs 54% avg</div></div>
-      <div class="kpi"><div class="n">7</div><div class="l">Held yest.</div><div class="d up">5 progressed</div></div>
-      <div class="kpi"><div class="n">17</div><div class="l">On board today</div><div class="d mid">9 showcases</div></div>
-      <div class="kpi"><div class="n down">2</div><div class="l">Need a step</div><div class="d down">open, stalled</div></div>
+      <div class="kpi"><div class="n">50%</div><div class="l">Show rate</div><div class="d up">&#9650; vs 47% 30-day</div></div>
+      <div class="kpi"><div class="n">9</div><div class="l">Held yest.</div><div class="d up">7 progressed</div></div>
+      <div class="kpi"><div class="n">23</div><div class="l">On board today</div><div class="d mid">9 showcases, 1 signing</div></div>
+      <div class="kpi"><div class="n up">0</div><div class="l">Need a step</div><div class="d up">open holds all set</div></div>
     </div>
     <div class="lines">
-      <div class="ln"><span class="mk win">Win</span><span><b>Eric Jacobson 3 for 3 progressed</b> (Ken, Sukaina, Shawn), all stepped forward with meetings booked.</span></div>
-      <div class="ln"><span class="mk now">Now</span><span><b>Joseph Soster $180K</b> (James) held but no next step, and it is Store Selected. Give it a step today.</span></div>
-      <div class="ln"><span class="mk watch">Watch</span><span>Second soft show day running (41% vs 54%). 7 cancels yesterday, mostly showcases rescheduling. louis cohen stale since Sep 28.</span></div>
+      <div class="ln"><span class="mk win">Win</span><span><b>78% progression (7 of 9 held)</b> and zero open holds left without a next step. Harry Barr advanced to a signing today.</span></div>
+      <div class="ln"><span class="mk now">Now</span><span><b>Harry Barr signing 1:00 PM MT / 4:00 PM ET</b> (Eric). Have the agreement ready before the call.</span></div>
+      <div class="ln"><span class="mk watch">Watch</span><span>Late stage is stalling: <b>7 of 8 Store Ready / Store Selected deals have no next step</b>, James owns 5. louis cohen untouched 18 days.</span></div>
     </div>
   </div>
 
   <div class="tabs" role="tablist" aria-label="Views">
-    <button class="tab" role="tab" id="tab-today" aria-controls="p-today" aria-selected="true">Today's board <span class="cnt">17</span></button>
-    <button class="tab" role="tab" id="tab-yest" aria-controls="p-yest" aria-selected="false">Yesterday <span class="cnt">7</span></button>
+    <button class="tab" role="tab" id="tab-today" aria-controls="p-today" aria-selected="true">Today's board <span class="cnt">23</span></button>
+    <button class="tab" role="tab" id="tab-yest" aria-controls="p-yest" aria-selected="false">Yesterday <span class="cnt">9</span></button>
     <button class="tab" role="tab" id="tab-pipe" aria-controls="p-pipe" aria-selected="false">Pipeline <span class="cnt">8</span></button>
   </div>
 
   <!-- TODAY -->
   <div class="panel on" id="p-today" role="tabpanel" aria-labelledby="tab-today">
+
+    <div class="signbar">
+      <span class="stag">Signing</span>
+      <span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65853561882" target="_blank" rel="noopener">Harry Barr</a> goes to signing today &middot; <b>1:00 PM MT / 4:00 PM ET</b> &middot; Eric Jacobson &middot; $100&ndash;250K. Prep the agreement.</span>
+    </div>
+
     <div class="card">
-      <h2><span class="accentbar ab-closer"></span>&#128293; Today's board <span class="big">&mdash; click a closer to open their day</span></h2>
+      <h2><span class="accentbar ab-closer"></span>&#128293; Today's board <span class="big">(click a closer to open their day)</span></h2>
 
       <details class="closerbox" open>
-        <summary><span class="chev">&#9654;</span><span class="who">Ben Wildman</span><span class="cnt2">7 meetings</span><span class="flag pill n">heaviest load</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Russ Vavra</span><span class="cnt2">7 meetings</span><span class="flag pill n">heaviest load</span></summary>
         <div class="meetings">
-          <div class="caphdr"><span>Prospect</span><span>Liquid cap</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65692693262" target="_blank" rel="noopener">Raj Chamarthi</a> <span class="mtype">Showcase</span></span><span class="cap">$500K+</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65802202970" target="_blank" rel="noopener">Brian Higgins</a> <span class="mtype">Showcase</span></span><span class="cap">$250&ndash;500K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65265130613" target="_blank" rel="noopener">Mark Greenway</a> <span class="mtype">Showcase</span></span><span class="cap">$250&ndash;500K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65837003181" target="_blank" rel="noopener">Matt Abshire</a> <span class="mtype">Strategy (resched)</span></span><span class="cap">$500K+</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65778019350" target="_blank" rel="noopener">Mike Gerry</a> <span class="mtype">Strategy (resched)</span></span><span class="cap">$100&ndash;250K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65892210308" target="_blank" rel="noopener">Christina Tweedy</a> <span class="mtype">Marketing Strategy</span></span><span class="cap">$250&ndash;500K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66067367489" target="_blank" rel="noopener">Joseph Peron</a> <span class="mtype">Strategy</span></span><span class="cap">$50&ndash;100K</span></div>
+          <div class="caphdr"><span>Prospect &middot; time ET</span><span>Liquid cap</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65888412675" target="_blank" rel="noopener">Rizwan Khan</a> <span class="mtype">10:15a &middot; Strategy</span></span><span class="cap">$500K+</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65850503089" target="_blank" rel="noopener">Gabriel Glass</a> <span class="mtype">12:00p &middot; Showcase</span></span><span class="cap">$500K+</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65551251787" target="_blank" rel="noopener">Bryan Hickman</a> <span class="mtype">12:45p &middot; Showcase</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65527758203" target="_blank" rel="noopener">Anthony Montagno</a> <span class="mtype">2:00p &middot; Strategy</span></span><span class="cap">$300&ndash;400K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66053841539" target="_blank" rel="noopener">Ernesto Perez</a> <span class="mtype">2:45p &middot; Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65799001429" target="_blank" rel="noopener">Izu Onyejekwe</a> <span class="mtype">4:15p &middot; Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66067746451" target="_blank" rel="noopener">Ryan Hendrickson</a> <span class="mtype">5:00p &middot; Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Eric Jacobson</span><span class="cnt2">5 meetings</span><span class="flag pill n">3 showcases</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Ben Wildman</span><span class="cnt2">6 meetings</span><span class="flag pill n">4 showcases</span></summary>
         <div class="meetings">
-          <div class="caphdr"><span>Prospect</span><span>Liquid cap</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65887563626" target="_blank" rel="noopener">Sukaina Jaffer</a> <span class="mtype">Showcase</span></span><span class="cap">$500K+</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65875618710" target="_blank" rel="noopener">Paul Upchurch</a> <span class="mtype">Showcase</span></span><span class="cap">$300&ndash;400K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65853561882" target="_blank" rel="noopener">Harry Barr</a> <span class="mtype">Showcase</span></span><span class="cap">$100&ndash;250K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65902667065" target="_blank" rel="noopener">Fanchon Anderson</a> <span class="mtype">Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65886582172" target="_blank" rel="noopener">Davayad Lurtin</a> <span class="mtype">Strategy</span></span><span class="cap none">&mdash;</span></div>
+          <div class="caphdr"><span>Prospect &middot; time ET</span><span>Liquid cap</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65692693262" target="_blank" rel="noopener">Raj Chamarthi</a> <span class="mtype">10:30a &middot; Showcase</span></span><span class="cap">$500K+</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65661054087" target="_blank" rel="noopener">Vineet Patel</a> <span class="mtype">12:00p &middot; Showcase</span></span><span class="cap">$250&ndash;500K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65778069009" target="_blank" rel="noopener">Samuel Young</a> <span class="mtype">1:00p &middot; Showcase</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66044742775" target="_blank" rel="noopener">Peter Henggeler</a> <span class="mtype">2:15p &middot; Strategy</span></span><span class="cap">$250&ndash;500K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65894917646" target="_blank" rel="noopener">Robert Frost</a> <span class="mtype">4:45p &middot; Marketing Strategy</span></span><span class="cap">$500K+</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65759414932" target="_blank" rel="noopener">Inder Jani</a> <span class="mtype">5:30p &middot; Showcase</span></span><span class="cap">$300&ndash;400K</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Russ Vavra</span><span class="cnt2">3 meetings</span><span class="flag pill n">2 marketing</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Eric Jacobson</span><span class="cnt2">5 meetings</span><span class="flag pill g">signing + 2 showcases</span></summary>
         <div class="meetings">
-          <div class="caphdr"><span>Prospect</span><span>Liquid cap</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/62862358630" target="_blank" rel="noopener">Alan Riendeau</a> <span class="mtype">Showcase</span></span><span class="cap">$500K+</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65855968039" target="_blank" rel="noopener">Vimal Sharma</a> <span class="mtype">Marketing Strategy</span></span><span class="cap">$300&ndash;400K</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66019838093" target="_blank" rel="noopener">Praveen Nevagi</a> <span class="mtype">Marketing Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="caphdr"><span>Prospect &middot; time ET</span><span>Liquid cap</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65971699520" target="_blank" rel="noopener">Puja Shah</a> <span class="mtype">10:15a &middot; Marketing Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65802148220" target="_blank" rel="noopener">Dan Hollis</a> <span class="mtype">1:00p &middot; Showcase</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65890395218" target="_blank" rel="noopener">John Brussa</a> <span class="mtype">2:00p &middot; Strategy</span></span><span class="cap">$250&ndash;500K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65887563626" target="_blank" rel="noopener">Sukaina Jaffer</a> <span class="mtype">3:00p &middot; Showcase</span></span><span class="cap">$500K+</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65853561882" target="_blank" rel="noopener">Harry Barr</a> <span class="mtype sign">4:00p &middot; SIGNING</span></span><span class="cap">$100&ndash;250K</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Aziz Kaffel</span><span class="cnt2">1 meeting</span><span class="flag pill n">light day</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">James Weisberg</span><span class="cnt2">3 meetings</span><span class="flag pill n">set + close</span></summary>
         <div class="meetings">
-          <div class="caphdr"><span>Prospect</span><span>Liquid cap</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65290667386" target="_blank" rel="noopener">Ramesh Dorairajan</a> <span class="mtype">Showcase</span></span><span class="cap">$50&ndash;100K</span></div>
+          <div class="caphdr"><span>Prospect &middot; time ET</span><span>Liquid cap</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66064950620" target="_blank" rel="noopener">Marce Prewitt</a> <span class="mtype">11:00a &middot; Strategy</span></span><span class="cap">$300&ndash;400K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/63303296038" target="_blank" rel="noopener">David Bradley</a> <span class="mtype">12:00p &middot; Strategy</span></span><span class="cap">$100&ndash;250K</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66067006264" target="_blank" rel="noopener">Risto Wyatt</a> <span class="mtype">1:45p &middot; Marketing Strategy</span></span><span class="cap">$50&ndash;100K</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Hunter Vavra</span><span class="cnt2">1 meeting</span><span class="flag pill n">set + close</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Aziz Kaffel</span><span class="cnt2">2 meetings</span><span class="flag pill n">light day</span></summary>
         <div class="meetings">
-          <div class="caphdr"><span>Prospect</span><span>Liquid cap</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66063527965" target="_blank" rel="noopener">Christy Cormier</a> <span class="mtype">Marketing Strategy</span></span><span class="cap">$50&ndash;100K</span></div>
+          <div class="caphdr"><span>Prospect &middot; time ET</span><span>Liquid cap</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66042343990" target="_blank" rel="noopener">Adrienne</a> <span class="mtype">11:30a &middot; Strategy</span></span><span class="cap none">&mdash;</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/62675539326" target="_blank" rel="noopener">Prabhakar Samala</a> <span class="mtype">6:00p &middot; Showcase</span></span><span class="cap none">&mdash;</span></div>
         </div>
       </details>
-      <p class="caption">17 meetings today, 9 showcases. Protect the high-value blocks. Note: lighter board than yesterday (21), several deals pushed to Fri Oct 16.</p>
+
+      <p class="caption">23 on the pipeline board, 9 showcases and one signing (Harry Barr, Eric). Four more early-stage strategy calls were booked overnight that are not yet tied to deals. Protect the high-value blocks and confirm the showcases first. Times in ET; MT is 3 hours earlier.</p>
     </div>
   </div>
 
   <!-- YESTERDAY -->
   <div class="panel" id="p-yest" role="tabpanel" aria-labelledby="tab-yest">
     <div class="card">
-      <h2><span class="accentbar ab-closer"></span>Closer production <span class="big">&mdash; Wed Oct 14, click to open each closer</span></h2>
+      <h2><span class="accentbar ab-closer"></span>Closer production <span class="big">(Thu Oct 15, click to open each closer)</span></h2>
 
       <details class="closerbox" open>
-        <summary><span class="chev">&#9654;</span><span class="who">Eric Jacobson</span><span class="cnt2">3 held &middot; 3 progressed</span><span class="flag pill g">clean 3/3</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Ben Wildman</span><span class="cnt2">3 held &middot; 3 progressed</span><span class="flag pill g">clean 3/3</span></summary>
         <div class="meetings">
           <div class="caphdr"><span>Prospect &middot; outcome</span><span>Next step</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65901285780" target="_blank" rel="noopener">Ken Travis</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 21</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65887563626" target="_blank" rel="noopener">Sukaina Jaffer</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 15</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65902692911" target="_blank" rel="noopener">Shawn Kautzsch</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 19</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66067367489" target="_blank" rel="noopener">Joseph Peron</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 20</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65837003181" target="_blank" rel="noopener">Matt Abshire</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 19</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65692693262" target="_blank" rel="noopener">Raj Chamarthi</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 16</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">James Weisberg</span><span class="cnt2">2 held &middot; 1 progressed</span><span class="flag pill a">1 need step</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Eric Jacobson</span><span class="cnt2">3 held &middot; 2 progressed</span><span class="flag pill a">1 closed lost</span></summary>
         <div class="meetings">
           <div class="caphdr"><span>Prospect &middot; outcome</span><span>Next step</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65800158827" target="_blank" rel="noopener">Praveen Rachakulla</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 23</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64589327981" target="_blank" rel="noopener">Joseph Soster</a> <span class="mtype">Showcase held &middot; Store Selected</span></span><span class="cap none" style="color:var(--bad)">none</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65887563626" target="_blank" rel="noopener">Sukaina Jaffer</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 16</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65853561882" target="_blank" rel="noopener">Harry Barr</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 16 signing</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65902667065" target="_blank" rel="noopener">Fanchon Anderson</a> <span class="mtype">Strategy held &middot; Closed Lost</span></span><span class="cap none">n/a</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Ben Wildman</span><span class="cnt2">1 held &middot; 1 progressed</span><span class="flag pill g">clean</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Russ Vavra</span><span class="cnt2">1 held &middot; 1 progressed</span><span class="flag pill g">clean</span></summary>
         <div class="meetings">
           <div class="caphdr"><span>Prospect &middot; outcome</span><span>Next step</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65802202970" target="_blank" rel="noopener">Brian Higgins</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 15</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/66019838093" target="_blank" rel="noopener">Praveen Nevagi</a> <span class="mtype">Strategy held</span></span><span class="cap g">Oct 22</span></div>
         </div>
       </details>
 
       <details class="closerbox">
-        <summary><span class="chev">&#9654;</span><span class="who">Russ Vavra</span><span class="cnt2">1 held &middot; 0 progressed</span><span class="flag pill r">1 need step</span></summary>
+        <summary><span class="chev">&#9654;</span><span class="who">Aziz Kaffel</span><span class="cnt2">1 held &middot; 1 progressed</span><span class="flag pill g">clean</span></summary>
         <div class="meetings">
           <div class="caphdr"><span>Prospect &middot; outcome</span><span>Next step</span></div>
-          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65765193824" target="_blank" rel="noopener">Michelle Miller</a> <span class="mtype">Showcase held</span></span><span class="cap none" style="color:var(--bad)">none</span></div>
+          <div class="mrow"><span><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65290667386" target="_blank" rel="noopener">Ramesh Dorairajan</a> <span class="mtype">Showcase held</span></span><span class="cap g">Oct 21</span></div>
         </div>
       </details>
-      <p class="caption">7 held of 17 on the calendar &mdash; 3 no-show, 7 cancel. 5 of 7 progressed (71%), the follow-through was strong even though the show rate was soft. "Next step" = booked meeting or logged task; <span style="color:var(--bad)">none</span> = went dark.</p>
+
+      <details class="closerbox">
+        <summary><span class="chev">&#9654;</span><span class="who">James Weisberg</span><span class="cnt2">1 held &middot; 0 progressed</span><span class="flag pill n">no deal yet</span></summary>
+        <div class="meetings">
+          <div class="caphdr"><span>Prospect &middot; outcome</span><span>Next step</span></div>
+          <div class="mrow"><span>Dawn <span class="mtype">Strategy held &middot; no deal created</span></span><span class="cap none">none</span></div>
+        </div>
+      </details>
+      <p class="caption">9 held of 18 on the calendar. 5 no-show, 4 cancel. 7 of 9 progressed (78%); Fanchon closed lost, Dawn has no deal yet. Every open deal that held booked a next step. "Next step" = booked meeting or logged task; <span style="color:var(--bad)">none</span> = went dark.</p>
     </div>
 
     <div class="card">
-      <h2><span class="accentbar ab-closer"></span>&#128308; Need a next step <span class="big">&mdash; open deals, held, nothing scheduled</span></h2>
-      <p class="subhead red">Open deals only. Live and sitting still. Joseph Soster is Store Selected, chase it first.</p>
-      <div class="tbl-wrap"><table>
-        <tr><th>Deal</th><th>Stage</th><th>Closer</th><th>Setter</th></tr>
-        <tr><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64589327981" target="_blank" rel="noopener">Joseph Soster</a> <span class="pill a">$180K</span></td><td>Store Selected</td><td>James Weisberg</td><td>James Weisberg</td></tr>
-        <tr><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65765193824" target="_blank" rel="noopener">Michelle Miller</a></td><td>Active Eval</td><td>Russ Vavra</td><td>Ed Rosenberg</td></tr>
-      </table></div>
+      <h2><span class="accentbar ab-closer"></span>&#9989; Need a next step <span class="big">(open deals, held, nothing scheduled)</span></h2>
+      <p class="subhead green">All clear. Every open deal that held yesterday has a next meeting or task booked. Nothing stalled out of the gate.</p>
+      <p class="note">The late-stage leak is on the Pipeline tab, not here: 7 of 8 Store Ready / Store Selected deals are sitting with no next step.</p>
     </div>
 
     <div class="card">
-      <h2><span class="accentbar ab-sdr"></span>SDR output <span class="big">&mdash; meetings booked by the setter</span></h2>
+      <h2><span class="accentbar ab-sdr"></span>SDR output <span class="big">(meetings booked by the setter)</span></h2>
       <div class="dash">
-        <div class="dashrow"><span class="who">Ed Rosenberg</span><div class="track"><div class="fill p" style="width:100%"></div></div><span class="v">4</span></div>
-        <div class="dashrow"><span class="who">Hunter Vavra</span><div class="track"><div class="fill p" style="width:75%"></div></div><span class="v">3</span></div>
-        <div class="dashrow"><span class="who">Easton Sherwood</span><div class="track"><div class="fill a" style="width:50%"></div></div><span class="v">2</span></div>
-        <div class="dashrow"><span class="who">James Weisberg</span><div class="track"><div class="fill a" style="width:25%"></div></div><span class="v">1</span></div>
+        <div class="dashrow"><span class="who">Hunter Vavra</span><div class="track"><div class="fill p" style="width:100%"></div></div><span class="v">7</span></div>
+        <div class="dashrow"><span class="who">James Weisberg</span><div class="track"><div class="fill p" style="width:71%"></div></div><span class="v">5</span></div>
+        <div class="dashrow"><span class="who">Easton Sherwood</span><div class="track"><div class="fill a" style="width:57%"></div></div><span class="v">4</span></div>
+        <div class="dashrow"><span class="who">Ed Rosenberg</span><div class="track"><div class="fill a" style="width:29%"></div></div><span class="v">2</span></div>
       </div>
-      <p class="caption">Counted by who booked the meeting. More even spread than earlier in the week. Dials + talk time come online once this proves out.</p>
+      <p class="caption">18 strategy calls booked by the four setters. Hunter led with 7. Ed (2) is still ramping since mid-Sep, so read his number against a two-week history. Counted by who booked the meeting.</p>
     </div>
 
     <div class="card">
-      <h2><span class="accentbar ab-lead"></span>Scoreboard <span class="big">&mdash; vs your own 30-day average</span></h2>
+      <h2><span class="accentbar ab-lead"></span>Scoreboard <span class="big">(vs the trailing 30-day)</span></h2>
       <div class="kstrip">
-        <div class="kpi"><div class="n">7</div><div class="l">Held</div><div class="d">&nbsp;</div></div>
-        <div class="kpi"><div class="n down">41%</div><div class="l">Show rate</div><div class="d down">&#9660; vs 54%</div></div>
-        <div class="kpi"><div class="n up">71%</div><div class="l">Progressed</div><div class="d up">5 of 7</div></div>
-        <div class="kpi"><div class="n down">10</div><div class="l">No-show+cxl</div><div class="d">3 + 7</div></div>
+        <div class="kpi"><div class="n">9</div><div class="l">Held</div><div class="d">&nbsp;</div></div>
+        <div class="kpi"><div class="n">50%</div><div class="l">Show rate</div><div class="d up">&#9650; vs 47%</div></div>
+        <div class="kpi"><div class="n up">78%</div><div class="l">Progressed</div><div class="d up">7 of 9</div></div>
+        <div class="kpi"><div class="n">9</div><div class="l">No-show+cxl</div><div class="d">5 + 4</div></div>
       </div>
-      <p class="caption">Two soft show days running (33% Mon, 41% Tue) vs the 54% bar &mdash; the show-rate dip is now a pattern, not a blip. But progression held at 71%, so the closers are converting what shows. The leak is upstream: confirmations and lead quality. Cancels (7) were mostly showcases rescheduling, not ghosting.</p>
+      <p class="caption">Show rate 50% yesterday, a touch above the 47% trailing-30-day trend, both on held/(held+no-show+cancel). Cancels count reschedules, so the raw bar sits under the 54% clean-confirmation target the team runs to. The real story is follow-through: 78% progressed and no open hold left without a step. The leak is upstream (confirmations and lead quality) and in late-stage movement.</p>
     </div>
   </div>
 
   <!-- PIPELINE -->
   <div class="panel" id="p-pipe" role="tabpanel" aria-labelledby="tab-pipe">
     <div class="card">
-      <h2><span class="accentbar ab-lead"></span>&#127937; Closest to signing <span class="big">&mdash; late-stage, with a health check</span></h2>
-      <p class="subhead">Open late-stage deals, ranked by stage. <b>Click a name to open the deal; audit the red ones.</b> Blank amount is a flag.</p>
+      <h2><span class="accentbar ab-lead"></span>&#127937; Closest to signing <span class="big">(late-stage, with a health check)</span></h2>
+      <p class="subhead red">Open late-stage deals, ranked by stage. <b>Click a name to open the deal; audit the red one.</b> Blank amount is a flag. 7 of 8 have no next step.</p>
       <div class="tbl-wrap"><table>
         <tr><th>#</th><th>Deal</th><th>Stage</th><th class="num">Deal amt</th><th>Owner</th><th>Health</th></tr>
-        <tr><td class="rank">1</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65581716242" target="_blank" rel="noopener">Carole Dale</a></td><td>Store Ready</td><td class="num"><span class="pill a">no amt</span></td><td>James Weisberg</td><td><span class="pill g">task today</span></td></tr>
-        <tr><td class="rank">2</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65197027682" target="_blank" rel="noopener">John Dubray</a></td><td>Store Ready</td><td class="num"><span class="pill a">no amt</span></td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
-        <tr><td class="rank">3</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64589327981" target="_blank" rel="noopener">Joseph Soster</a></td><td>Store Selected</td><td class="num">$180K</td><td>James Weisberg</td><td><span class="pill r">held, no step</span></td></tr>
-        <tr><td class="rank">4</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64294080953" target="_blank" rel="noopener">Elaina Bertrand</a></td><td>Store Selected</td><td class="num">$800K</td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
-        <tr><td class="rank">5</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/61630072437" target="_blank" rel="noopener">Nathan Snyder</a></td><td>Store Selected</td><td class="num">$250K</td><td>Aziz Kaffel</td><td><span class="pill g">task today</span></td></tr>
+        <tr><td class="rank">1</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64294080953" target="_blank" rel="noopener">Elaina Bertrand</a></td><td>Store Selected</td><td class="num">$800K</td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
+        <tr><td class="rank">2</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/62259023958" target="_blank" rel="noopener">louis cohen</a></td><td>Store Selected</td><td class="num">$250K</td><td>James Weisberg</td><td><span class="pill r">audit, stale 18d</span></td></tr>
+        <tr><td class="rank">3</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/61630072437" target="_blank" rel="noopener">Nathan Snyder</a></td><td>Store Selected</td><td class="num">$250K</td><td>Aziz Kaffel</td><td><span class="pill a">no next step</span></td></tr>
+        <tr><td class="rank">4</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64589327981" target="_blank" rel="noopener">Joseph Soster</a></td><td>Store Selected</td><td class="num">$180K</td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
+        <tr><td class="rank">5</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64019921495" target="_blank" rel="noopener">Scott Kogan</a></td><td>Store Selected</td><td class="num"><span class="pill a">no amt</span></td><td>Aziz Kaffel</td><td><span class="pill a">no next step</span></td></tr>
         <tr><td class="rank">6</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65813701743" target="_blank" rel="noopener">Kingsley Ozoude</a></td><td>Store Selected</td><td class="num"><span class="pill a">no amt</span></td><td>Ben Wildman</td><td><span class="pill a">no next step</span></td></tr>
-        <tr><td class="rank">7</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/64019921495" target="_blank" rel="noopener">Scott Kogan</a></td><td>Store Selected</td><td class="num"><span class="pill a">no amt</span></td><td>Aziz Kaffel</td><td><span class="pill a">no next step</span></td></tr>
-        <tr><td class="rank">8</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/62259023958" target="_blank" rel="noopener">louis cohen</a></td><td>Store Selected</td><td class="num">$250K</td><td>James Weisberg</td><td><span class="pill r">audit, stale 17d</span></td></tr>
+        <tr><td class="rank">7</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65581716242" target="_blank" rel="noopener">Carole Dale</a></td><td>Store Ready</td><td class="num"><span class="pill a">no amt</span></td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
+        <tr><td class="rank">8</td><td><a class="deal" href="https://app.hubspot.com/contacts/24343234/deal/65197027682" target="_blank" rel="noopener">John Dubray</a></td><td>Store Ready</td><td class="num"><span class="pill a">no amt</span></td><td>James Weisberg</td><td><span class="pill a">no next step</span></td></tr>
       </table></div>
-      <p class="caption">Carole and Nathan both got a task today, good. Still 5 of 8 with no next step. Joseph Soster held yesterday and still has nothing booked. louis cohen untouched since Sep 28. James owns 5 of these 8.</p>
+      <p class="caption">7 of 8 are sitting with no next step booked. James owns 5 of the 8, including Elaina Bertrand ($800K) and Joseph Soster ($180K). louis cohen has been untouched since Sep 28 (18 days) with a task parked to Nov 14, audit whether that is a real park or a soft kill. Four of the eight have no deal amount, fill them in.</p>
     </div>
   </div>
 
@@ -299,26 +323,26 @@
       <div class="col win">
         <h3>&#127942; Call out</h3>
         <ul>
-          <li><b>Eric Jacobson</b> &mdash; 3 of 3 progressed, booked a next step on every held call.</li>
-          <li><b>Ed Rosenberg</b> &mdash; top setter again, 4 booked.</li>
-          <li><b>71% progression</b> &mdash; floor converted what showed, despite the soft board.</li>
+          <li><b>Hunter Vavra</b> &ndash; top setter, 7 strategy calls booked.</li>
+          <li><b>Eric Jacobson</b> &ndash; pushed Harry Barr to a signing today and progressed 2 of 3 holds.</li>
+          <li><b>Follow-through</b> &ndash; 100% of open holds got a next step, nothing fell through.</li>
         </ul>
       </div>
       <div class="col fix">
         <h3>&#9193; Orders (&le;3)</h3>
         <ol>
-          <li><b>James</b> &mdash; Joseph Soster $180K held with no step, and you own 5 late-stage deals with no next meeting. Sweep today.</li>
-          <li><b>Whole floor</b> &mdash; two soft show days running. Confirm today's 17 the night before; showcases first.</li>
-          <li><b>Russ</b> &mdash; Michelle Miller went dark, give her a step.</li>
+          <li><b>Eric</b> &ndash; Harry Barr signs today 1:00 PM MT / 4:00 PM ET. Have the agreement ready before the call.</li>
+          <li><b>James</b> &ndash; you own 5 of 8 late-stage deals with no next step (Elaina $800K, Joseph $180K, louis, Carole, John Dubray). Book a step on each today.</li>
+          <li><b>Whole floor</b> &ndash; confirm today's 23 the night before, showcases first. louis cohen needs an audit.</li>
         </ol>
       </div>
     </div>
   </div>
 
   <p class="foot">
-    <b>Pulse / Vector</b> &middot; HubSpot portal 24343234, pipeline Partner Acquisitions &middot; live pull Oct 14&ndash;15 ET.
-    <b>Held</b> = Completed, HubSpot-booked only (Zoom shadows stripped) &middot; <b>Need a step</b> = open deal, held, no next meeting and no task &middot; <b>Show bar</b> = your 30-day actual (54%).
-    Group review here; individual coaching in 1:1s. Single-day samples are small &mdash; read the pattern.
+    <b>Pulse / Vector</b> &middot; HubSpot portal 24343234, pipeline Partner Acquisitions &middot; live pull Oct 15&ndash;16 ET.
+    <b>Held</b> = Completed sales meetings only (Low Ticket, candidate and ops rows stripped) &middot; <b>Need a step</b> = open deal, held, no next meeting and no task &middot; <b>Show bar</b> = trailing-30-day held/(held+no-show+cancel) = 47% (cancels include reschedules; the clean 60-60 target is 54%).
+    Group review here; individual coaching in 1:1s. Single-day samples are small, read the pattern.
   </p>
 
 </div>
