@@ -89,6 +89,12 @@
   .mrow .cap.g { color:var(--good); }
   .caphdr { display:grid; grid-template-columns:1fr 92px; gap:10px; padding:0 0 4px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-faint); font-weight:600; }
   .caphdr span:last-child { text-align:right; }
+  .cvhdr { display:grid; grid-template-columns:1fr 50px 64px 54px; gap:8px; padding:0 0 4px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-faint); font-weight:600; }
+  .cvhdr span { text-align:right; } .cvhdr span:first-child { text-align:left; }
+  .cvrow { display:grid; grid-template-columns:1fr 50px 64px 54px; gap:8px; padding:7px 0; border-top:1px solid var(--line); font-size:13px; align-items:center; }
+  .cvrow .nm { font-weight:600; }
+  .cvrow .v { text-align:right; font-variant-numeric:tabular-nums; }
+  .cvrow .v.q { color:var(--ink-faint); }
   .dash { display:grid; gap:10px; }
   .dashrow { display:grid; grid-template-columns:116px 1fr 34px; align-items:center; gap:10px; }
   .dashrow .who { font-weight:600; font-size:13px; }
@@ -298,24 +304,32 @@
 
     <div class="card">
       <h2><span class="accentbar ab-sdr"></span>&#128222; Call volume <span class="big">(outbound dials, Thu Oct 15)</span></h2>
-      <p class="subhead">Outbound dials logged yesterday, with 60s+ connects. Connect = 60s+ talk time (duration-based; dispositions are ~98% unlogged, so they are not used).</p>
-      <div class="tbl-wrap"><table>
-        <tr><th>Rep</th><th class="num">Dials</th><th class="num">Connects 60s+</th><th class="num">Connect rate</th></tr>
-        <tr><td colspan="4" style="background:var(--surface-2);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-faint);font-weight:700;padding:6px 10px;">Setters</td></tr>
-        <tr><td>James Weisberg</td><td class="num">138</td><td class="num">1</td><td class="num">1%</td></tr>
-        <tr><td>Easton Sherwood</td><td class="num">96</td><td class="num">9</td><td class="num">9%</td></tr>
-        <tr><td>Hunter Vavra</td><td class="num">84</td><td class="num">15</td><td class="num">18%</td></tr>
-        <tr><td>Ed Rosenberg</td><td class="num">56</td><td class="num">11</td><td class="num">20%</td></tr>
-        <tr><td style="font-weight:700;">Setter subtotal</td><td class="num" style="font-weight:700;">374</td><td class="num" style="font-weight:700;">36</td><td class="num" style="font-weight:700;">10%</td></tr>
-        <tr><td colspan="4" style="background:var(--surface-2);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-faint);font-weight:700;padding:6px 10px;">Closers</td></tr>
-        <tr><td>Aziz Kaffel</td><td class="num">12</td><td class="num">0</td><td class="num">0%</td></tr>
-        <tr><td>Eric Jacobson</td><td class="num">9</td><td class="num">1</td><td class="num">11%</td></tr>
-        <tr><td>Ben Wildman</td><td class="num">6</td><td class="num">1</td><td class="num">17%</td></tr>
-        <tr><td>Russ Vavra</td><td class="num">5</td><td class="num">3</td><td class="num">60%</td></tr>
-        <tr><td>Austin McKinty</td><td class="num">0</td><td class="num">0</td><td class="num">n/a</td></tr>
-        <tr><td style="font-weight:700;">Closer subtotal</td><td class="num" style="font-weight:700;">32</td><td class="num" style="font-weight:700;">5</td><td class="num" style="font-weight:700;">16%</td></tr>
-        <tr><td style="font-weight:700;border-top:2px solid var(--line-strong);">Team total</td><td class="num" style="font-weight:700;border-top:2px solid var(--line-strong);">406</td><td class="num" style="font-weight:700;border-top:2px solid var(--line-strong);">41</td><td class="num" style="font-weight:700;border-top:2px solid var(--line-strong);">10%</td></tr>
-      </table></div>
+      <p class="subhead">Outbound dials logged yesterday, with 60s+ connects. Click a team to break it down by rep. Connect = 60s+ talk time (duration-based; dispositions are ~98% unlogged, so they are not used).</p>
+
+      <details class="closerbox" open>
+        <summary><span class="chev">&#9654;</span><span class="who">SDR team</span><span class="cnt2">374 dials &middot; 36 connects</span><span class="flag pill n">10% connect</span></summary>
+        <div class="meetings">
+          <div class="cvhdr"><span>Rep</span><span>Dials</span><span>60s+</span><span>Rate</span></div>
+          <div class="cvrow"><span class="nm">James Weisberg</span><span class="v">138</span><span class="v">1</span><span class="v q">1%</span></div>
+          <div class="cvrow"><span class="nm">Easton Sherwood</span><span class="v">96</span><span class="v">9</span><span class="v">9%</span></div>
+          <div class="cvrow"><span class="nm">Hunter Vavra</span><span class="v">84</span><span class="v">15</span><span class="v">18%</span></div>
+          <div class="cvrow"><span class="nm">Ed Rosenberg</span><span class="v">56</span><span class="v">11</span><span class="v">20%</span></div>
+        </div>
+      </details>
+
+      <details class="closerbox">
+        <summary><span class="chev">&#9654;</span><span class="who">Closer team</span><span class="cnt2">32 dials &middot; 5 connects</span><span class="flag pill n">16% connect</span></summary>
+        <div class="meetings">
+          <div class="cvhdr"><span>Rep</span><span>Dials</span><span>60s+</span><span>Rate</span></div>
+          <div class="cvrow"><span class="nm">Aziz Kaffel</span><span class="v">12</span><span class="v">0</span><span class="v q">0%</span></div>
+          <div class="cvrow"><span class="nm">Eric Jacobson</span><span class="v">9</span><span class="v">1</span><span class="v">11%</span></div>
+          <div class="cvrow"><span class="nm">Ben Wildman</span><span class="v">6</span><span class="v">1</span><span class="v">17%</span></div>
+          <div class="cvrow"><span class="nm">Russ Vavra</span><span class="v">5</span><span class="v">3</span><span class="v">60%</span></div>
+          <div class="cvrow"><span class="nm">Austin McKinty</span><span class="v">0</span><span class="v">0</span><span class="v q">n/a</span></div>
+        </div>
+      </details>
+
+      <div class="cvrow" style="border-top:2px solid var(--line-strong);padding:10px 14px 2px;font-weight:700;"><span class="nm">Team total</span><span class="v">406</span><span class="v">41</span><span class="v">10%</span></div>
       <p class="caption">406 outbound dials logged, 41 connects at 60s+ (10% team). James is text-first, so his 138 dials convert near 1% by phone (he books over SMS, not the dialer). Hunter and Ed ran the cleanest phone days (18-20%). Closers dial light by design, they work booked meetings rather than prospect. Austin logged 0 dials yesterday. Closer connect rates sit on tiny samples (5 to 12 dials), so read them as directional.</p>
     </div>
   </div>
